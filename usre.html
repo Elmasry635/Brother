@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Page</title>
+  <script>
+    const username = "masry";
+    const password = "123456";
+
+    const checkLogin = () => {
+      const enteredUsername = document.getElementById("username").value;
+      const enteredPassword = document.getElementById("password").value;
+
+      if (enteredUsername === username && enteredPassword === password) {
+        window.location.href = "Brothers.html";
+      } else {
+        alert("Invalid login credentials. Please try again.");
+      }
+    };
+  </script>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f2f2f2;
+          margin: 0;
+          padding: 20px;
+        }
+    
+        h1 {
+          text-align: center;
+          color: #333;
+        }
+    
+        form {
+          max-width: 300px;
+          margin: 20px auto;
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 5px;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    
+        label {
+          display: block;
+          margin-bottom: 10px;
+          color: #555;
+        }
+    
+        input[type="text"],
+        input[type="password"] {
+          width: 92%;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 3px;
+          margin-bottom: 20px;
+        }
+    
+        button {
+          background-color: #4CAF50;
+          color: #fff;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 3px;
+          cursor: pointer;
+        }
+    
+        button:hover {
+          background-color: #45a049;
+        }
+    
+        .error-message {
+          color: #f00;
+        }
+      </style>
+    
+</head>
+<body>
+  <h1>Login</h1>
+
+  <form>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br>
+
+    <button type="button" onclick="checkLogin()">Login</button>
+  </form>
+</body>
+</html>
