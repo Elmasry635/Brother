@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>Advanced Dashboard</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #000;
+  color: #fff;
+}
+
+/* خلفية */
+body::before {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: url("https://www.transparenttextures.com/patterns/stardust.png");
+  opacity: 0.3;
+  z-index: -1;
+}
+
+/* Top Bar */
+.top {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  flex-wrap: wrap;
+}
+
+input {
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+}
+
+button {
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Navbar */
+.navbar {
+  background: #ddd;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.navbar button {
+  background: transparent;
+  margin: 5px;
+  font-weight: bold;
+}
+
+.navbar button.active {
+  background: purple;
+  color: white;
+}
+
+/* Mega Menu */
+.mega {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #111;
+  padding: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.mega a {
+  margin: 6px 10px;
+  color: white;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.mega a:hover {
+  text-decoration: underline;
+}
+
+/* Active */
+.mega.active {
+  display: flex;
+}
+
+/* Search */
+.search {
+  text-align: center;
+  margin: 10px;
+}
+
+.search input {
+  width: 300px;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  margin-top: 30px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Top -->
+<div class="top">
+  <input id="num1" placeholder="Number With FBB">
+  <button onclick="copy('num1')">Copy</button>
+
+  <input id="num2" placeholder="ADSL Number">
+  <button onclick="copy('num2')">Copy</button>
+</div>
+
+<!-- Navbar -->
+<div class="navbar">
+  <button onclick="openMenu(event,'sales')" class="active">SR Sales</button>
+  <button onclick="openMenu(event,'tech')">SR Technical</button>
+  <button onclick="openMenu(event,'billing')">Billing</button>
+  <button onclick="openMenu(event,'mobile')">Mobile</button>
+</div>
+
+<!-- Search -->
+<div class="search">
+  <input type="text" placeholder="Search..." onkeyup="search(this.value)">
+</div>
+
+<!-- Mega Menus -->
+
+<div id="sales" class="mega active">
+  <a href="#">Valid offers</a>
+  <a href="#">Expired offers</a>
+  <a href="#">Early renewal</a>
+  <a href="#">Suspension</a>
+  <a href="#">Individual Case</a>
+  <a href="#">Price and Quota</a>
+</div>
+
+<div id="tech" class="mega">
+  <a href="#">Speed Test</a>
+  <a href="#">Connection Issue</a>
+  <a href="#">Router Config</a>
+  <a href="#">Signal Issue</a>
+  <a href="#">Complaint</a>
+</div>
+
+<div id="billing" class="mega">
+  <a href="#">Landline Bills</a>
+  <a href="#">Payment Methods</a>
+  <a href="#">Refund</a>
+  <a href="#">Invoice</a>
+</div>
+
+<div id="mobile" class="mega">
+  <a href="#">Recharge</a>
+  <a href="#">Packages</a>
+  <a href="#">Offers</a>
+  <a href="#">SIM Replacement</a>
+</div>
+
+<div class="footer">
+  <h2>Ireport / Cases</h2>
+</div>
+
+<script>
+
+/* Copy */
+function copy(id){
+  let input = document.getElementById(id);
+  input.select();
+  document.execCommand("copy");
+}
+
+/* Open Menu */
+function openMenu(evt,id){
+  let menus = document.querySelectorAll(".mega");
+  let btns = document.querySelectorAll(".navbar button");
+
+  menus.forEach(m=>m.classList.remove("active"));
+  btns.forEach(b=>b.classList.remove("active"));
+
+  document.getElementById(id).classList.add("active");
+  evt.currentTarget.classList.add("active");
+}
+
+/* Search */
+function search(val){
+  val = val.toLowerCase();
+  let links = document.querySelectorAll(".mega a");
+
+  links.forEach(l=>{
+    if(l.textContent.toLowerCase().includes(val)){
+      l.style.display="inline";
+    }else{
+      l.style.display="none";
+    }
+  });
+}
+
+/* حفظ البيانات */
+window.onload = function(){
+  num1.value = localStorage.getItem("num1") || "";
+  num2.value = localStorage.getItem("num2") || "";
+}
+
+num1.oninput = ()=> localStorage.setItem("num1", num1.value);
+num2.oninput = ()=> localStorage.setItem("num2", num2.value);
+
+</script>
+
+</body>
+</html>
